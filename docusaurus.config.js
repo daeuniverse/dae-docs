@@ -9,7 +9,7 @@ const config = {
   title: "Dae",
   tagline: "A Linux high-performance transparent proxy solution based on eBPF",
   // favicon: 'img/favicon.ico',
-  favicon: "https://github.com/daeuniverse/dae/raw/main/logo.png",
+  favicon: "https://github.com/daeuniverse/assets/raw/master/logo.png",
 
   // Set the production url of your site here
   url: "https://dae.v2raya.org",
