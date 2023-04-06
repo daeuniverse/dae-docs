@@ -4,44 +4,25 @@ sidebar_position: 1
 
 # Intro
 
-Let's discover **Dae in less than 10 minutes**.
+![](../static/img/logo-100x100.png)
 
-## Getting Started
+Let's discover **[Dae](https://github.com/daeuniverse/dae)** in less than 10 minutes.
 
-Get started by **creating a new site**.
+_dae_, means goose, is a high-performance transparent proxy solution.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+In order to improve the traffic split performance as much as possible, dae runs as a **_transparent proxy_** and split traffic in the linux kernel with [eBPF](https://ebpf.io/). Therefore, dae has the opportunity to make the direct traffic bypass the IP forwarding with proxy application and achieve true direct traffic through. Under such a magic trick, there is almost no performance loss and additional resource consumption for direct traffic.
 
-### What you'll need
+## Features
 
-- [Node.js](https://nodejs.org/en/download/) version 16.14 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+- [x] Implement `Real Direct` traffic split (need ipforward on) to achieve [high performance](https://docs.google.com/spreadsheets/d/1UaWU6nNho7edBNjNqC8dfGXLlW0-cm84MM7sH6Gp7UE/edit?usp=sharing).
+- [x] Support to split traffic by process name in local host.
+- [x] Support to split traffic by MAC address in LAN.
+- [x] Support to split traffic with invert match rules.
+- [x] Support to automatically switch nodes according to policy. That is to say, support to automatically test independent TCP/UDP/IPv4/IPv6 latencies, and then use the best nodes for corresponding traffic according to user-defined policy.
+- [x] Support advanced DNS resolution process.
+- [x] Support full-cone NAT for shadowsocks, trojan(-go) and socks5 (no test).
 
-## Generate a new site
+## Notes
 
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+1. If you setup dae and also a shadowsocks server (or any UDP servers) on the same machine in public network, such as a VPS, don't forget to add `l4proto(udp) && sport(your server ports) -> must_direct` rule for your UDP server port. Because states of UDP are hard to maintain, all outgoing UDP packets will potentially be proxied (depends on your routing), including traffic to your client. This behaviour is not what we want to see. `must_direct` makes all traffic from this port including DNS traffic direct.
+2. If users in mainland China find that the first screen time is very long when they visit some domestic websites for the first time, please check whether you use foreign DNS to handle some domestic domain in DNS routing. Sometimes this is hard to spot. For example, `ocsp.digicert.cn` is included in `geosite:geolocation-!cn` unexpectedly, which will cause some tls handshakes to take a long time. Be careful to use such domain sets in DNS routing.
