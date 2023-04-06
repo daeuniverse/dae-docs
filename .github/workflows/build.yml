@@ -33,6 +33,7 @@ jobs:
           image: ${{ env.USER }}/${{ env.IMAGE_NAME }}
           build_file: ${{ env.DOCKER_FILE }}
           tag: ${{ env.IMAGE_TAG }}-${{ steps.export_commit_sha.outputs.sha_short }}
+          tag_with_latest: true
           cache: true
           cache_registry: quay.io/${{ env.USER }}/cache
 
