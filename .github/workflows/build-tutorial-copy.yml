@@ -9,7 +9,7 @@ jobs:
       DOCKER_FILE: Dockerfile
       USER: daeuniverse
       IMAGE_NAME: dae-docs
-      IMAGE_TAG: v1
+      IMAGE_TAG: tutorial
     steps:
       - uses: actions/checkout@master
       - name: Get HEAD git sha
