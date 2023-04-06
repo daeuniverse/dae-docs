@@ -10,13 +10,15 @@ sidebar_position: 2
 
 Use `uname -r` to check the kernel version on your machine.
 
-:::danger Note
+:::note note
 
-If you find your kernel version is `< 5.8`, follow the [**Upgrade Guide**](./kernel-upgrade.md) to upgrade the kernel to the minimum required version.
+If you find your kernel version is `< 5.8`, follow the [**Upgrade Guide**](./basics/kernel-upgrade-guide) to upgrade the kernel to the minimum required version.
 
 :::
 
-**Bind to LAN: >= 5.8**
+#### Bind to LAN: >= 5.8
+
+:::important important
 
 You need bind dae to LAN interface, if you want to provide network service for LAN as an intermediate device.
 
@@ -24,13 +26,19 @@ This feature requires the kernel version of machine on which dae install >= 5.8.
 
 Note that if you bind dae to LAN only, dae only provide network service for traffic from LAN, and not impact local programs.
 
-**Bind to WAN: >= 5.8**
+:::
+
+#### Bind to WAN: >= 5.8
+
+:::important important
 
 You need bind dae to WAN interface, if you want dae to provide network service for local programs.
 
 This feature requires kernel version of the machine >= 5.8.
 
 Note that if you bind dae to WAN only, dae only provide network service for local programs and not impact traffic coming in from other interfaces.
+
+:::
 
 ### Kernel Configurations
 
@@ -69,7 +77,13 @@ Check them using command like:
 (zcat /proc/config.gz || cat /boot/{config,config-$(uname -r)}) | grep -E 'CONFIG_(DEBUG_INFO|DEBUG_INFO_BTF|KPROBES|KPROBE_EVENTS|BPF|BPF_SYSCALL|BPF_JIT|BPF_STREAM_PARSER|NET_CLS_ACT|NET_SCH_INGRESS|NET_INGRESS|NET_EGRESS|NET_CLS_BPF|BPF_EVENTS|CGROUPS)=|# CONFIG_DEBUG_INFO_REDUCED is not set'
 ```
 
-> **Note** > `Armbian` users can follow the [**Upgrade Guide**](./kernel-upgrade.md) to upgrade the kernel to meet the kernel configuration requirement.
+:::tip tips
+
+`Armbian` users can follow the [**Upgrade Guide**](./basics/kernel-upgrade-guide) to upgrade the kernel to meet the kernel configuration requirement.
+
+:::
+
+---
 
 ## Installation
 
@@ -111,7 +125,7 @@ See [daeuniverse/dae-installer](https://github.com/daeuniverse/dae-installer) (o
 
 ### Build from scratch
 
-See [Build Guide](build-by-yourself.md).
+See [Build Guide](./basics/build-guide).
 
 ---
 
@@ -185,12 +199,16 @@ See more at [example.dae](https://github.com/daeuniverse/dae/blob/main/example.d
 
 If you use PVE, refer to [GitHub Issue #37](https://github.com/daeuniverse/dae/discussions/37).
 
+---
+
 ## Reload and suspend
 
 When the configuration changes, it is convenient to use command to hot reload the configuration, and the existing connection will not be interrupted in the process. When you want to suspend dae, you can use command to pause.
 
-See [Reload and suspend](reload-and-suspend.md).
+See [Reload and suspend](./basics/reload-and-suspend).
+
+---
 
 ## Troubleshooting
 
-See [Troubleshooting](troubleshooting.md).
+See [Troubleshooting](./troubleshooting).
