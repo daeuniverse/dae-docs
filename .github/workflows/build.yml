@@ -3,7 +3,7 @@ name: Build OCI Container
 on:
   workflow_dispatch:
 jobs:
-  build-runner:
+  build:
     runs-on: ubuntu-latest
     env:
       DOCKER_FILE: Dockerfile
