@@ -14,7 +14,7 @@ If you use a external DNS like AdguardHome, you could refer to the following gui
 
 ## External DNS on localhost
 
-:::important actions
+:::info actions
 
 If you set up an external DNS on localhost, you may want to let the DNS queries to dns.google.com proxied. For example, if you have the following configuration in AdguardHome:
 
@@ -64,7 +64,7 @@ dns {
 
 ## External DNS on another machine in LAN
 
-:::important actions
+:::info actions
 
 If you set up a external DNS on another machine in LAN, you may want to let the DNS queries to dns.google.com proxied. For example, if you have following configuration in AdguardHome:
 

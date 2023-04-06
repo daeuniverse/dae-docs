@@ -10,7 +10,7 @@ sidebar_position: 5
 invalid argument: unknown func bpf_trace_printk
 ```
 
-:::important actions
+:::info actions
 
 Compile dae with CFLAG `-D__REMOVE_BPF_PRINTK`. See [Build guide](./basics/build-guide).
 
@@ -24,7 +24,7 @@ Compile dae with CFLAG `-D__REMOVE_BPF_PRINTK`. See [Build guide](./basics/build
 
 #### Troubleshoot local DNS service
 
-:::important actions
+:::info actions
 
 If you use `systemd-resolved`, `dnsmasq` or other local DNS service in `/etc/resolv.conf`, do not use their DNS service.
 
@@ -39,7 +39,7 @@ Alternatively, if you really want to use them, refer to [external-dns](./advance
 
 #### Troubleshoot firewall
 
-:::important actions
+:::info actions
 
 If you bind to wan, make sure firewall is stopped or `12345` is allowed by firewall. Don't worry about the security of this port because this port has its own firewall rule.
 
@@ -54,7 +54,7 @@ firewalld
 
 #### Troubleshoot PPPoE
 
-:::important actions
+:::info actions
 
 dae does not support PPPoE yet. We are working on it. However, binding to LAN for other machines should work fine.
 
@@ -64,7 +64,7 @@ dae does not support PPPoE yet. We are working on it. However, binding to LAN fo
 
 #### Troubleshoot config of dae
 
-:::important actions
+:::info actions
 
 Make sure you have bind to the correct LAN interfaces.
 
@@ -74,7 +74,7 @@ For example, if your use the same interface eth1 for WAN and LAN, write it as `w
 
 #### Troubleshoot DNS
 
-:::important actions
+:::info actions
 
 To verify on another machine in LAN:
 

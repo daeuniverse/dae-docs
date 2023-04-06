@@ -40,6 +40,13 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
+          lastVersion: "current",
+          versions: {
+            current: {
+              label: "Current 🚧",
+              path: "current",
+            },
+          },
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),

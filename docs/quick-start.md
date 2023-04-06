@@ -18,7 +18,7 @@ If you find your kernel version is `< 5.8`, follow the [**Upgrade Guide**](./bas
 
 #### Bind to LAN: >= 5.8
 
-:::important important
+:::info important
 
 You need bind dae to LAN interface, if you want to provide network service for LAN as an intermediate device.
 
@@ -30,7 +30,7 @@ Note that if you bind dae to LAN only, dae only provide network service for traf
 
 #### Bind to WAN: >= 5.8
 
-:::important important
+:::info important
 
 You need bind dae to WAN interface, if you want dae to provide network service for local programs.
 
