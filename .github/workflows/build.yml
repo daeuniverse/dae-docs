@@ -5,10 +5,9 @@ on:
   push:
     branches:
       - master
-      - fix*
-      - feat*
-      - patch*
       - ci*
+  pull_request:
+    types: [ opened, synchronize, reopened ]
 jobs:
   build:
     runs-on: ubuntu-latest
