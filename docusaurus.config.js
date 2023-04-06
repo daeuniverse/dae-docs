@@ -55,13 +55,15 @@ const config = {
     ],
   ],
 
+  plugins: [require.resolve("docusaurus-lunr-search")],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
       image: "img/docusaurus-social-card.jpg",
       tableOfContents: {
-        minHeadingLevel: 1,
+        minHeadingLevel: 2,
         maxHeadingLevel: 5,
       },
       navbar: {
