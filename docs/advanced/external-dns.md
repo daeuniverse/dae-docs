@@ -31,7 +31,7 @@ You should configure dae as follows:
 
 2. Insert following rule as the first line of "routing" section to avoid loops.
 
-```go
+```python title="config.dae"
 pname(AdGuardHome) && l4proto(udp) && dport(53) -> must_direct
 ```
 
@@ -39,7 +39,7 @@ And make sure domain `dns.google.com` will be proxied in routing rules.
 
 3. Add upstream and request to section "dns".
 
-```css
+```python title="config.dae"
 dns {
   upstream {
     adguardhome: "udp://127.0.0.1:53";
@@ -81,7 +81,7 @@ You should configure dae as follows:
 
 2. Insert following rule as the first line of "routing" section to avoid loops.
 
-```go
+```python title="config.dae"
 sip(192.168.30.3) && l4proto(udp) && dport(53) -> must_direct
 # Or use MAC address if in the same link:
 # mac(8c:16:45:36:1c:5a) && l4proto(udp) && dport(53) -> must_direct
@@ -91,7 +91,7 @@ And make sure domain `dns.google.com` will be proxied in routing rules.
 
 3. Add upstream and request to section "dns".
 
-```css
+```python title="config.dae"
 dns {
   upstream {
     adguardhome: "udp://192.168.30.3:53";

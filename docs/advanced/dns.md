@@ -8,7 +8,7 @@ position: 1
 
 ## Examples
 
-```python
+```python title="config.dae"
 dns {
     upstream {
         # Value can be scheme://host:port.
@@ -70,7 +70,7 @@ dns {
 
 Use alidns for China mainland domains and googledns for others.
 
-```python
+```python title="config.dae"
 dns {
   upstream {
     googledns: 'tcp+udp://dns.google.com:53'
@@ -97,7 +97,7 @@ dns {
 
 Use alidns for all DNS queries and fallback to googledns if pollution result detected.
 
-```shell
+```python title="config.dae"
 dns {
   upstream {
     googledns: 'tcp+udp://dns.google.com:53'
