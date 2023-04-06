@@ -2,14 +2,14 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const lightCodeTheme = require("prism-react-renderer/themes/github");
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const darkCodeTheme = require("prism-react-renderer/themes/palenight");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Dae",
   tagline: "A Linux high-performance transparent proxy solution based on eBPF",
   // favicon: 'img/favicon.ico',
-  favicon: "https://github.com/daeuniverse/dae/raw/main/logo.png",
+  favicon: "https://github.com/daeuniverse/assets/raw/master/logo.png",
 
   // Set the production url of your site here
   url: "https://dae.v2raya.org",
