@@ -1,0 +1,35 @@
+---
+name: Build OCI Container (Tutorial Copy)
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_FILE: Dockerfile
+      USER: daeuniverse
+      IMAGE_NAME: dae-docs
+      IMAGE_TAG: v1
+    steps:
+      - uses: actions/checkout@master
+      - name: Get HEAD git sha
+        id: export_commit_sha
+        run: |
+          echo "sha_long=${{ github.sha }}" >> $GITHUB_OUTPUT
+          echo "sha_short=$(echo ${{ github.sha }} | cut -c1-6)" >> $GITHUB_OUTPUT
+      - name: Kaniko build - quay.io
+        id: quay_build
+        uses: aevea/action-kaniko@master
+        with:
+          registry: quay.io
+          username: ${{ env.USER }}
+          password: ${{ secrets.QUAY_PASS }}
+          image: ${{ env.USER }}/${{ env.IMAGE_NAME }}
+          build_file: ${{ env.DOCKER_FILE }}
+          tag: ${{ env.IMAGE_TAG }}-${{ steps.export_commit_sha.outputs.sha_short }}
+          cache: true
+          cache_registry: quay.io/${{ env.USER }}/cache
+
+      - name: Echo image uri
+        run: |
+          echo "ImageURI (quay.io): quay.io/${{ env.USER }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-${{ steps.export_commit_sha.outputs.sha_short }}"
