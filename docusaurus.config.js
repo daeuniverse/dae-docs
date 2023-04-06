@@ -60,6 +60,10 @@ const config = {
     ({
       // Replace with your project's social card
       image: "img/docusaurus-social-card.jpg",
+      tableOfContents: {
+        minHeadingLevel: 1,
+        maxHeadingLevel: 5,
+      },
       navbar: {
         title: "Dae",
         logo: {
