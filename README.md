@@ -1,6 +1,8 @@
 # dae-docs
 
-Official documentation site for [daeuniverse/dae](https://github.com/daeuniverse/dae).
+Official documentation site for [daeuniverse/dae](https://github.com/daeuniverse/dae)
+
+Built with [Docusarus](https://docusaurus.io/), hosted on [Kubernetes](http://kubernetes.io/) with [Kong API Gateway](https://github.com/Kong/kong)
 
 ## How to run
 
