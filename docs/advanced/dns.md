@@ -58,7 +58,6 @@ dns {
             fallback: accept
         }
     }
-
 }
 ```
 
