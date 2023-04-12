@@ -42,6 +42,6 @@
 }
 
 [data-theme="dark"]
-  .language-shell.codeBlockContainer_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Container-styles-module.theme-code-block {
+  .codeBlockContainer_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Container-styles-module.theme-code-block {
   --prism-background-color: #1f2024 !important;
 }
