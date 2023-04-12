@@ -1,6 +1,6 @@
 {
   "name": "dae-docs",
-  "version": "0.0.0",
+  "version": "0.1.6",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
