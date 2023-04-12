@@ -32,8 +32,8 @@
 
 /* custom */
 [data-theme="dark"] .alert--info {
-  --ifm-alert-background-color: #364659;
-  --ifm-alert-border-color: #accaf2;
+  --ifm-alert-background-color: #121126;
+  --ifm-alert-border-color: #5f4c8a;
 }
 
 [data-theme="dark"] .alert--success {
@@ -41,7 +41,6 @@
   --ifm-alert-border-color: #a6bc09;
 }
 
-[data-theme="dark"]
-  .codeBlockContainer_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Container-styles-module.theme-code-block {
+[data-theme="dark"] .theme-code-block {
   --prism-background-color: #1f2024 !important;
 }
