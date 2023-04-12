@@ -66,6 +66,11 @@ const config = {
         minHeadingLevel: 2,
         maxHeadingLevel: 5,
       },
+      colorMode: {
+        defaultMode: "dark",
+        disableSwitch: false,
+        respectPrefersColorScheme: false,
+      },
       navbar: {
         title: "Dae",
         logo: {
