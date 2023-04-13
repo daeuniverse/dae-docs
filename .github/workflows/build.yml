@@ -58,6 +58,6 @@ jobs:
     uses: daeuniverse/ci-seed-jobs/.github/workflows/notify-build-result.yml@master
     with:
       IMAGE_NAME: ${{ needs.build-and-push.outputs.image_name }}
-      IMAGE_TAG: ${{ needs.build-and-push.outputs.image_tagq }}
+      IMAGE_TAG: ${{ needs.build-and-push.outputs.image_tag }}
       SHA_SHORT: ${{ needs.pre-build.outputs.git_sha_short }}
     secrets: inherit
