@@ -12,6 +12,7 @@ on:
 jobs:
   # Pre-Action Stage
   export-metadata:
+    id: export-metadata
     uses: daeuniverse/ci-seed-jobs/.github/workflows/export-metadata.yml@master
     with:
       repository: ${{ github.repository }}
