@@ -44,7 +44,7 @@ jobs:
 
       - name: Echo image uri
         run: |
-          echo "ImageURI (quay.io): quay.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          echo "ImageURI (quay.io): quay.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}"
 
 
   # Post-Action Stage
