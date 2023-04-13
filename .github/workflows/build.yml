@@ -22,10 +22,10 @@ jobs:
     env:
       DOCKER_FILE: Dockerfile
       IMAGE_NAME: dae-docs
-      IMAGE_TAG: v1
+      IMAGE_TAG: ${{ github.head_ref || github.ref_name }}-${{ steps.export_commit_sha.outputs.sha_short }}-${{ github.run_number }}
     outputs:
       image_name: ${{ env.IMAGE_NAME }}
-      image_tag: ${{ github.head_ref || github.ref_name }}-${{ steps.export_commit_sha.outputs.sha_short }}-${{ github.run_number }}
+      image_tag: ${{ env.IMAGE_TAG }}
     steps:
       - uses: actions/checkout@master
       - name: Get HEAD git sha
@@ -42,14 +42,14 @@ jobs:
           password: ${{ secrets.QUAY_PASS }}
           image: ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
           build_file: ${{ env.DOCKER_FILE }}
-          tag: ${{ github.head_ref || github.ref_name }}-${{ steps.export_commit_sha.outputs.sha_short }}-${{ github.run_number }}
+          tag: ${{ env.IMAGE_TAG }}
           tag_with_latest: true
           cache: true
           cache_registry: quay.io/${{ github.repository_owner }}/cache
 
       - name: Echo image uri
         run: |
-          echo "ImageURI (quay.io): quay.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-${{ steps.export_commit_sha.outputs.sha_short }}-${{ github.run_number }}"
+          echo "ImageURI (quay.io): quay.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
 
   # Post-Action Stage
