@@ -22,17 +22,12 @@ jobs:
     env:
       DOCKER_FILE: Dockerfile
       IMAGE_NAME: dae-docs
-      IMAGE_TAG: ${{ github.head_ref || github.ref_name }}-${{ steps.export_commit_sha.outputs.sha_short }}-${{ github.run_number }}
+      IMAGE_TAG: ${{ github.head_ref || github.ref_name }}-${{ needs.pre-build.outputs.git_sha_short }}-${{ github.run_number }}
     outputs:
       image_name: ${{ env.IMAGE_NAME }}
       image_tag: ${{ env.IMAGE_TAG }}
     steps:
       - uses: actions/checkout@master
-      - name: Get HEAD git sha
-        id: export_commit_sha
-        run: |
-          echo "sha_long=${{ github.sha }}" >> $GITHUB_OUTPUT
-          echo "sha_short=$(echo ${{ github.sha }} | cut -c1-6)" >> $GITHUB_OUTPUT
       - name: Kaniko build - quay.io
         id: quay_build
         uses: aevea/action-kaniko@master
