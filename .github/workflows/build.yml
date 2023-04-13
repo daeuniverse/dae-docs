@@ -49,7 +49,7 @@ jobs:
 
   # Post-Action Stage
   post-build:
-    needs: [build-and-push]
+    needs: [pre-build,build-and-push]
     uses: daeuniverse/ci-seed-jobs/.github/workflows/notify-build-result.yml@master
     with:
       IMAGE_NAME: ${{ needs.build-and-push.outputs.image_name }}
