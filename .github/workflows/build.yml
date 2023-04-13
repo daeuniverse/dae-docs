@@ -32,7 +32,7 @@ jobs:
     with:
       git_sha_long: ${{ needs.export-metadata.outputs.git_sha_long }}
       git_sha_short: ${{ needs.export-metadata.outputs.git_sha_short }}
-      git_comit_msg: ${{ needs.export-metadata.outputs.git_comit_msg }}
+      git_commit_msg: ${{ needs.export-metadata.outputs.git_commit_msg }}
     secrets: inherit
 
   # Build Stage
