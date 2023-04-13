@@ -66,5 +66,5 @@ jobs:
     with:
       IMAGE_NAME: ${{ needs.build-and-push.outputs.image_name }}
       IMAGE_TAG: ${{ needs.build-and-push.outputs.image_tag }}
-      SHA_SHORT: ${{ jobs.export-metadata.outputs.git_sha_short }}
+      SHA_SHORT: ${{ needs.export-metadata.outputs.git_sha_short }}
     secrets: inherit
