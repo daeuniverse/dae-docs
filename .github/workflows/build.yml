@@ -19,12 +19,18 @@ jobs:
       git_commit_msg: ${{ steps.export.outputs.git_commit_msg }}
     steps:
       - uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.after }}
       - name: Get HEAD metadata
         id: export
         run: |
-          echo "git_sha_long=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
-          echo "git_sha_short=$(git rev-parse --short HEAD | cut -c1-6)" >> $GITHUB_OUTPUT
-          echo "git_commit_msg=$(git show -s --format=%s)" >> $GITHUB_OUTPUT
+          # echo "git_sha_long=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          # echo "git_sha_short=$(git rev-parse --short HEAD | cut -c1-6)" >> $GITHUB_OUTPUT
+          # echo "git_commit_msg=$(git show -s --format=%s)" >> $GITHUB_OUTPUT
+          echo "git_sha_long=${{ github.event.after }}" >> $GITHUB_OUTPUT
+          echo "git_sha_short=$(echo ${{ github.event.after }} | cut -c1-6)" >> $GITHUB_OUTPUT
+          echo "git_commit_msg=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_OUTPUT
 
   pre-build:
     needs: [export-metadata]
