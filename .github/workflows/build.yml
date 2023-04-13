@@ -11,8 +11,28 @@ on:
 
 jobs:
   # Pre-Action Stage
+  export-metadata:
+    runs-on: ubuntu-latest
+    outputs:
+      git_sha_long: ${{ steps.export.outputs.git_sha_long }}
+      git_sha_short: ${{ steps.export.outputs.git_sha_short }}
+      git_commit_msg: ${{ steps.export.outputs.git_commit_msg }}
+    steps:
+      - uses: actions/checkout@master
+      - name: Get HEAD metadata
+        id: export
+        run: |
+          echo "git_sha_long=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          echo "git_sha_short=$(git rev-parse --short HEAD | cut -c1-6)" >> $GITHUB_OUTPUT
+          echo "git_commit_msg=$(git show -s --format=%s)" >> $GITHUB_OUTPUT
+
   pre-build:
+    needs: [export-metadata]
     uses: daeuniverse/ci-seed-jobs/.github/workflows/notify-build-start.yml@master
+    with:
+      git_sha_long: ${{ needs.export-metadata.outputs.git_sha_long }}
+      git_sha_short: ${{ needs.export-metadata.outputs.git_sha_short }}
+      git_comit_msg: ${{ needs.export-metadata.outputs.git_comit_msg }}
     secrets: inherit
 
   # Build Stage
