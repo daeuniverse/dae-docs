@@ -12,22 +12,26 @@ on:
 jobs:
   # Pre-Action Stage
   export-metadata:
-    runs-on: ubuntu-latest
-    outputs:
-      git_sha_long: ${{ steps.export.outputs.git_sha_long }}
-      git_sha_short: ${{ steps.export.outputs.git_sha_short }}
-      git_commit_msg: ${{ steps.export.outputs.git_commit_msg }}
-    steps:
-      - uses: actions/checkout@master
-        with:
-          fetch-depth: 0
-          ref: ${{ github.event.after }}
-      - name: Get HEAD metadata
-        id: export
-        run: |
-          echo "git_sha_long=${{ github.event.after }}" >> $GITHUB_OUTPUT
-          echo "git_sha_short=$(echo ${{ github.event.after }} | cut -c1-6)" >> $GITHUB_OUTPUT
-          echo "git_commit_msg=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_OUTPUT
+    uses: daeuniverse/ci-seed-jobs/.github/workflows/export-metadata.yml@master
+    with:
+      repository: ${{ github.repository }}
+      ref: ${{ github.event.after }}
+      fetch-depth: 0
+    # outputs:
+    #   git_sha_long: ${{ steps.export.outputs.git_sha_long }}
+    #   git_sha_short: ${{ steps.export.outputs.git_sha_short }}
+    #   git_commit_msg: ${{ steps.export.outputs.git_commit_msg }}
+    # steps:
+    #   - uses: actions/checkout@master
+    #     with:
+    #       fetch-depth: 0
+    #       ref: ${{ github.event.after }}
+    #   - name: Get HEAD metadata
+    #     id: export
+    #     run: |
+    #       echo "git_sha_long=${{ github.event.after }}" >> $GITHUB_OUTPUT
+    #       echo "git_sha_short=$(echo ${{ github.event.after }} | cut -c1-6)" >> $GITHUB_OUTPUT
+    #       echo "git_commit_msg=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_OUTPUT
 
   notify-build-start:
     needs: [export-metadata]
