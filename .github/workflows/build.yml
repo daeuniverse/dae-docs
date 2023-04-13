@@ -25,14 +25,11 @@ jobs:
       - name: Get HEAD metadata
         id: export
         run: |
-          # echo "git_sha_long=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
-          # echo "git_sha_short=$(git rev-parse --short HEAD | cut -c1-6)" >> $GITHUB_OUTPUT
-          # echo "git_commit_msg=$(git show -s --format=%s)" >> $GITHUB_OUTPUT
           echo "git_sha_long=${{ github.event.after }}" >> $GITHUB_OUTPUT
           echo "git_sha_short=$(echo ${{ github.event.after }} | cut -c1-6)" >> $GITHUB_OUTPUT
           echo "git_commit_msg=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_OUTPUT
 
-  pre-build:
+  notify-build-start:
     needs: [export-metadata]
     uses: daeuniverse/ci-seed-jobs/.github/workflows/notify-build-start.yml@master
     with:
@@ -44,11 +41,11 @@ jobs:
   # Build Stage
   build-and-push:
     runs-on: ubuntu-latest
-    needs: [pre-build]
+    needs: [notify-build-start]
     env:
       DOCKER_FILE: Dockerfile
       IMAGE_NAME: dae-docs
-      IMAGE_TAG: ${{ github.head_ref || github.ref_name }}-${{ needs.pre-build.outputs.git_sha_short }}-${{ github.run_number }}
+      IMAGE_TAG: ${{ github.head_ref || github.ref_name }}-${{ needs.notify-build-start.outputs.git_sha_short }}-${{ github.run_number }}
     outputs:
       image_name: ${{ env.IMAGE_NAME }}
       image_tag: ${{ env.IMAGE_TAG }}
@@ -74,11 +71,11 @@ jobs:
 
 
   # Post-Action Stage
-  post-build:
-    needs: [pre-build,build-and-push]
+  notify-build-result:
+    needs: [notify-build-start,build-and-push]
     uses: daeuniverse/ci-seed-jobs/.github/workflows/notify-build-result.yml@master
     with:
       IMAGE_NAME: ${{ needs.build-and-push.outputs.image_name }}
       IMAGE_TAG: ${{ needs.build-and-push.outputs.image_tag }}
-      SHA_SHORT: ${{ needs.pre-build.outputs.git_sha_short }}
+      SHA_SHORT: ${{ needs.notify-build-start.outputs.git_sha_short }}
     secrets: inherit
