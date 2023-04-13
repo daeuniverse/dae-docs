@@ -12,7 +12,6 @@ on:
 jobs:
   # Pre-Action Stage
   export-metadata:
-    id: export-metadata
     uses: daeuniverse/ci-seed-jobs/.github/workflows/export-metadata.yml@master
     with:
       repository: ${{ github.repository }}
@@ -31,11 +30,11 @@ jobs:
   # Build Stage
   build-and-push:
     runs-on: ubuntu-latest
-    needs: [notify-build-start]
+    needs: [export-metadata,notify-build-start]
     env:
       DOCKER_FILE: Dockerfile
       IMAGE_NAME: dae-docs
-      IMAGE_TAG: ${{ github.head_ref || github.ref_name }}-${{ jobs.export-metadata.outputs.git_sha_short }}-${{ github.run_number }}
+      IMAGE_TAG: ${{ github.head_ref || github.ref_name }}-${{ needs.export-metadata.outputs.git_sha_short }}-${{ github.run_number }}
     outputs:
       image_name: ${{ env.IMAGE_NAME }}
       image_tag: ${{ env.IMAGE_TAG }}
@@ -62,7 +61,7 @@ jobs:
 
   # Post-Action Stage
   notify-build-result:
-    needs: [build-and-push]
+    needs: [export-metadata,build-and-push]
     uses: daeuniverse/ci-seed-jobs/.github/workflows/notify-build-result.yml@master
     with:
       IMAGE_NAME: ${{ needs.build-and-push.outputs.image_name }}
