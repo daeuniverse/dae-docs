@@ -8,14 +8,24 @@ on:
       - ci*
   pull_request:
     types: [ opened, synchronize, reopened ]
+
 jobs:
-  build:
+  # Pre-Action Stage
+  pre-build:
+    uses: daeuniverse/ci-seed-jobs/.github/workflows/notify-build-start.yml@master
+    secrets: inherit
+
+  # Build Stage
+  build-and-push:
     runs-on: ubuntu-latest
+    needs: [pre-build]
     env:
       DOCKER_FILE: Dockerfile
-      USER: daeuniverse
       IMAGE_NAME: dae-docs
       IMAGE_TAG: v1
+    outputs:
+      image_name: ${{ env.IMAGE_NAME }}
+      image_tag: ${{ env.IMAGE_TAG }}-${{ steps.export_commit_sha.outputs.sha_short }}-${{ github.run_number }}
     steps:
       - uses: actions/checkout@master
       - name: Get HEAD git sha
@@ -28,15 +38,26 @@ jobs:
         uses: aevea/action-kaniko@master
         with:
           registry: quay.io
-          username: ${{ env.USER }}
+          username: ${{ github.repository_owner }}
           password: ${{ secrets.QUAY_PASS }}
-          image: ${{ env.USER }}/${{ env.IMAGE_NAME }}
+          image: ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
           build_file: ${{ env.DOCKER_FILE }}
-          tag: ${{ env.IMAGE_TAG }}-${{ steps.export_commit_sha.outputs.sha_short }}
+          tag: ${{ env.IMAGE_TAG }}-${{ steps.export_commit_sha.outputs.sha_short }}-${{ github.run_number }}
           tag_with_latest: true
           cache: true
-          cache_registry: quay.io/${{ env.USER }}/cache
+          cache_registry: quay.io/${{ github.repository_owner }}/cache
 
       - name: Echo image uri
         run: |
-          echo "ImageURI (quay.io): quay.io/${{ env.USER }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-${{ steps.export_commit_sha.outputs.sha_short }}"
+          echo "ImageURI (quay.io): quay.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-${{ steps.export_commit_sha.outputs.sha_short }}-${{ github.run_number }}"
+
+
+  # Post-Action Stage
+  post-build:
+    needs: [pre-build,build-and-push]
+    uses: daeuniverse/ci-seed-jobs/.github/workflows/notify-build-result.yml@master
+    with:
+      IMAGE_NAME: ${{ needs.build-and-push.outputs.image_name }}
+      IMAGE_TAG: ${{ needs.build-and-push.outputs.image_tagq }}
+      SHA_SHORT: ${{ needs.pre-build.outputs.git_sha_short }}
+    secrets: inherit
