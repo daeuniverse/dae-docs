@@ -13,9 +13,7 @@ jobs:
   # Pre-Action Stage
   pre-build:
     uses: daeuniverse/ci-seed-jobs/.github/workflows/notify-build-start.yml@master
-    secrets:
-      TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
-      TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+    secrets: inherit
 
   # Build Stage
   build-and-push:
@@ -62,6 +60,4 @@ jobs:
       IMAGE_NAME: ${{ needs.build-and-push.outputs.image_name }}
       IMAGE_TAG: ${{ needs.build-and-push.outputs.image_tagq }}
       SHA_SHORT: ${{ needs.pre-build.outputs.git_sha_short }}
-    secrets:
-      TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
-      TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+    secrets: inherit
