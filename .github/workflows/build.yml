@@ -60,6 +60,7 @@ jobs:
   #     SHA_SHORT: ${{ needs.pre-actions.outputs.git_sha_short }}
   #   secrets: inherit
   post-actions:
+    needs: [pre-actions,build-and-push]
     uses: daeuniverse/ci-seed-jobs/.github/workflows/post-actions.yml@master
     with:
       image_name: ${{ needs.build-and-push.outputs.image_name }}
