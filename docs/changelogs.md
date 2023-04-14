@@ -6,8 +6,6 @@ sidebar_position: 8
 
 Also seen in [GitHub Releases](https://github.com/daeuniverse/dae/releases)
 
-HTML version available at https://dae.v2raya.org/docs/changelogs
-
 ## Query history releases
 
 ```bash
