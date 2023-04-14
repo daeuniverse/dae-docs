@@ -58,7 +58,6 @@ jobs:
         run: |
           echo "ImageURI (quay.io): quay.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}"
 
-
   # Post-Action Stage
   notify-build-result:
     needs: [export-metadata,build-and-push]
