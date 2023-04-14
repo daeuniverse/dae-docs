@@ -27,18 +27,18 @@ curl --silent "https://api.github.com/repos/daeuniverse/dae/releases" | jq -r '.
 
 > Release date: 2023/04/12
 
-#### 特性
+#### Feature
 
-支持 `global.sniffing_timeout` 来设定嗅探的超时时间，调大这个值对于时延较高的局域网来说较为有用。
+1. Add support to use `global.sniffing` to set the timeout of sniffing, and it is useful to increase the timeout for LANS with high latency.
 
-#### 修复
+#### Fix
 
-1. 修复无法解析小火箭 shadowrocket 的 vmess+ws+tls 分享链接的问题。
-2. 修复域名嗅探失败的问题。
+1. Fix the issue of not being able to resolve the `VMESS + WS + TLS` share link in ShadowRocket.
+2. Fix the issue of domain name sniffing failure.
 
 #### PR
 
-- chore: fix doamin regex example by @troubadour-hell in https://github.com/daeuniverse/dae/pull/53
+- chore: fix domain regex example by @troubadour-hell in https://github.com/daeuniverse/dae/pull/53
 - doc: add badges and contribution guide by @yqlbu in https://github.com/daeuniverse/dae/pull/54
 
 #### New Contributors
@@ -51,20 +51,20 @@ curl --silent "https://api.github.com/repos/daeuniverse/dae/releases" | jq -r '.
 
 > Release date: 2023/04/09
 
-#### 特性
+#### Feature
 
-- 支持在 dns 的 request 路由中使用 reject 出站。
-- 支持在 routing 中使用 `must_组名` 的出站，该规则将强制作用于 DNS 请求，直接通过特定组发出，而绕过 dns 模块，提供给有特殊用途的用户使用。
-- 支持在 routing 中使用 `must_rules` 的出站，命中该出站的 DNS 请求将绕过 dns 模块，直接进行路由并发出，提供给有特殊用途的用户使用。
-- 支持 v2rayN 格式的 vmess 分享格式中的不标准 bool 值解析。
-- 支持在 dns 中使用 `ipversion_prefer`，设定当域名是双栈时，只返回 ipv4 还是只返回 ipv6。
+- Add supports to use `reject` for outbound in `DNS request routing section.
+- Add support for outbound routing using `must group names`. This rule will be enforced on DNS requests directly through a specific group, bypassing DNS modules, available to users that have special use cases.
+- Add support to use `must_rules` four outbound routing. Requests that hit such outbound will bypass the DNS module and will route based on rules for users that have special use cases.
+- Add support to non-standard `bool` value parsing in VMESS formatting followed by V2RAYN.
+- Add supports to use `ipversion_prefer` in DNS section. Specify return ONLY ipv4 or ipv6 response if the NIC is dual-stack.
 
-#### 修复
+#### Fix
 
-- 修复在 dns 的 response 路由中对无序 ip 序列的支持问题。
-- 修复 trojan 可能的 panic 问题。
-- dns 缓存丢失且 dial_mode 为 domain 时将尝试重路由，以缓解 dns 缓存丢失时无法使用 domain 进行路由的问题。
-- 修复部分游戏无法进入的问题，该问题是由于 tcp 建立连接时，dae 总是等待客户端发包，但一些游戏场景中，首包是由服务端 push 的，因此陷入无限等待。
+- Fix support for unordered IP sequences in response routing in DNS.
+- Fix potential panic issue for `trojan` protocol
+- Add support to re-route traffic under the condition of the DNS cache is lost and the dial is domain, to mitigate the problem of not being able to use domain for routing when the DNS cache is lost.
+- Fix issue of not being able to load some video games that rely heavily on internet connection. The reason behind the scene is that dae always waits for the client to send packets when TCP establishes a connection, but in some games, the first packet is pushed by the server, so it gets stuck in an infinite wait.
 
 **Full Changelog**: https://github.com/daeuniverse/dae/compare/v0.1.5...v0.1.6
 
@@ -72,13 +72,13 @@ curl --silent "https://api.github.com/repos/daeuniverse/dae/releases" | jq -r '.
 
 > Release date: 2023/03/29
 
-#### 更新内容
+#### Changelogs
 
-- 修复 wan_interface 填入 auto 时可能出现的无法启动的问题。
-- 修复 https 协议（naiveproxy）的支持问题，新增对 h2 的长连接和多路复用。
-- 移除 DNS 抢答检测器，因为它不总是在所有地区都有效，而且在失效时会减慢查询速度。
-- 文档（example.dae）：增加通过节点标签精确筛选节点的示例 @yqlbu in https://github.com/daeuniverse/dae/pull/44
-- 文档（example.dae）：新增一个 tcp 健康检测 url by @yqlbu in https://github.com/daeuniverse/dae/pull/46
+- Fix a problem that might occur when WAN binding sets to auto.
+- Fix support of HTTPS (naiveproxy), adding long connections and multiplexing to H2.
+- Remove the DNS answer detector as it does not always work in all locales and slows down queries when it fails.
+- doc(example.dae)：add examples to demonstrate how to select a specific node @yqlbu in https://github.com/daeuniverse/dae/pull/44
+- doc(example.dae)：add a new tcp health check url by @yqlbu in https://github.com/daeuniverse/dae/pull/46
 
 **Full Changelog**: https://github.com/daeuniverse/dae/compare/v0.1.4...v0.1.5
 
@@ -86,14 +86,14 @@ curl --silent "https://api.github.com/repos/daeuniverse/dae/releases" | jq -r '.
 
 > Release date: 2023/03/25
 
-#### 更新内容
+#### Changelogs
 
-- domain routing 给出不标准的域名时将忽略而不是报错。
-- 将 config 所在目录加入到 geodata 的搜索路径。
-- 优化 udp 的内存占用。
-- 忽略 sighup 而使用 sigusr2 作为 suspend 的信号。
-- 支持自动配置 sysctl 参数。
-- 文档: 更新 debian-kernel-upgrade by @yqlbu in https://github.com/daeuniverse/dae/pull/39
+- Domain-based routing will ignore rather than prompting error when giving a non-standard domain name.
+- Add the config directory to the search path for geodata.
+- Optimize udp memory usage.
+- Ignore Sighup and use SIGUSR2 as the suspend signal.
+- Add support to config sysctl params automatically
+- Documentation: Add debian-kernel-upgrade-guide by @yqlbu in https://github.com/daeuniverse/dae/pull/39
 
 **Full Changelog**: https://github.com/daeuniverse/dae/compare/v0.1.3...v0.1.4
 
@@ -101,19 +101,19 @@ curl --silent "https://api.github.com/repos/daeuniverse/dae/releases" | jq -r '.
 
 > Release date: 2023/03/24
 
-#### 用户相关
+#### User related
 
-- 新增 amd64_v2_sse 和 amd64_v3_avx 的可执行文件构建，使用更高的版本理论上可提高一定性能（这次 Release 的 CI 失败了，等下次吧） by @MarksonHon in https://github.com/daeuniverse/dae/pull/38
-- 支持自动侦测 WAN 接口，在 wan_interface 填入 auto 即可。
-- 修复热重载失败时的不正确的回滚行为，以及在一定条件下更改 group 配置时可能无法连接新组的问题。
-- 修复在有 MAC 地址路由的情况下 bind to WAN 将导致无网络的问题。
-- 修改启动时网络联通性检查使用的链接 https://github.com/daeuniverse/dae/commit/c2e02482d0588823d2a3d9cae6998b9a7a5a1fae 。
-- 修复在一定条件下可能的针对 DNS upstream 的域名分流失败的问题。
+- Add support to build `amd64_v2_sse` and `amd64_v3_avx` executables. Use a higher version to build could theoretically improve some performance (the CI for this Release failed, but maybe next time) by @MarksonHon in https://github.com/daeuniverse/dae/pull/38
+- Supports automatic detection of WAN interfaces by filling auto in the WAN.
+- Fix incorrect rollback behavior when a hot overload failed and fix possible inability to connect to a new group when changing the group configuration under certain conditions.
+- Fix bind to WAN network connectivity issues in the condition of MAC address routing.
+- Modify the link used for network connectivity checks at startup.
+- Fix possible failure of DNS split under certain conditions.
 
-#### 开发者相关
+#### Developer related
 
-- 打包了包括 go vendor 和 git submodules 在内的源码并随 releases 发布。
-- 增加了 export 命令的描述。
+- Source code, including go vendor and Git submodules, is packaged and published with releases.
+- Added a description of the export command.
 
 **Full Changelog**: https://github.com/daeuniverse/dae/compare/v0.1.2...v0.1.3
 
@@ -121,10 +121,10 @@ curl --silent "https://api.github.com/repos/daeuniverse/dae/releases" | jq -r '.
 
 > Release date: 2023/03/22
 
-1. 优化热重载时的 DNS 缓存行为，解决热重载时 outbound out of range 的问题。
-2. 增加高通的 generate_204 作为网络联通性检查的链接，以解决部分用户无法访问`www.msftconnecttest.com`的问题。
-3. 支持龙芯 loong64 架构。
-4. 修复大并发下可能的崩溃问题。
+1. Optimize DNS cache behavior for outbound out of range for hot overload.
+2. Add Qualcomm's generate_204 as a link to check the network connectivity, addressing the problem of some users not being able to access www.msftconnecttest.com.
+3. Support Loong64 architecture.
+4. Fix possible crashes under large concurrency use case.
 
 **Full Changelog**: https://github.com/daeuniverse/dae/compare/v0.1.1...v0.1.2
 
