@@ -12,20 +12,21 @@ on:
 jobs:
   # Pre-Action Stage
   export-metadata:
-    uses: daeuniverse/ci-seed-jobs/.github/workflows/export-metadata.yml@master
+    # uses: daeuniverse/ci-seed-jobs/.github/workflows/export-metadata.yml@master
+    uses: daeuniverse/ci-seed-jobs/.github/workflows/pre-actions.yml@master
     with:
       repository: ${{ github.repository }}
       ref: ${{ github.event.after }}
       fetch-depth: 0
 
-  notify-build-start:
-    needs: [export-metadata]
-    uses: daeuniverse/ci-seed-jobs/.github/workflows/notify-build-start.yml@master
-    with:
-      git_sha_long: ${{ needs.export-metadata.outputs.git_sha_long }}
-      git_sha_short: ${{ needs.export-metadata.outputs.git_sha_short }}
-      git_commit_msg: ${{ needs.export-metadata.outputs.git_commit_msg }}
-    secrets: inherit
+  # notify-build-start:
+  #   needs: [export-metadata]
+  #   uses: daeuniverse/ci-seed-jobs/.github/workflows/notify-build-start.yml@master
+  #   with:
+  #     git_sha_long: ${{ needs.export-metadata.outputs.git_sha_long }}
+  #     git_sha_short: ${{ needs.export-metadata.outputs.git_sha_short }}
+  #     git_commit_msg: ${{ needs.export-metadata.outputs.git_commit_msg }}
+  #   secrets: inherit
 
   # Build Stage
   build-and-push:
