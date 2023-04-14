@@ -18,6 +18,7 @@ jobs:
       repository: ${{ github.repository }}
       ref: ${{ github.event.after }}
       fetch-depth: 0
+    secrets: inherit
 
   # notify-build-start:
   #   needs: [export-metadata]
