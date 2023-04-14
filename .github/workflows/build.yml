@@ -24,12 +24,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: [pre-actions]
     env:
-      DOCKER_FILE: Dockerfile
-      IMAGE_NAME: dae-docs
-      IMAGE_TAG: ${{ github.head_ref || github.ref_name }}-${{ needs.pre-actions.outputs.git_sha_short }}-${{ github.run_number }}
+      dockerfile: Dockerfile
+      image_name: dae-docs
+      image_tag: ${{ github.head_ref || github.ref_name }}-${{ needs.pre-actions.outputs.git_sha_short }}-${{ github.run_number }}
     outputs:
-      image_name: ${{ env.IMAGE_NAME }}
-      image_tag: ${{ env.IMAGE_TAG }}
+      image_name: ${{ env.image_name }}
+      image_tag: ${{ env.image_tag }}
     steps:
       - uses: actions/checkout@master
       - name: Kaniko build - quay.io
@@ -39,26 +39,17 @@ jobs:
           registry: quay.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.QUAY_PASS }}
-          image: ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
-          build_file: ${{ env.DOCKER_FILE }}
-          tag: ${{ env.IMAGE_TAG }}
+          image: ${{ github.repository_owner }}/${{ env.image_name }}
+          build_file: ${{ env.dockerfile }}
+          tag: ${{ env.image_tag }}
           tag_with_latest: true
           cache: true
           cache_registry: quay.io/${{ github.repository_owner }}/cache
 
       - name: Echo image uri
         run: |
-          echo "ImageURI (quay.io): quay.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}"
+          echo "ImageURI (quay.io): quay.io/${{ github.repository_owner }}/${{ env.image_name }}:${{ env.image_tag }}"
 
-  # Post-Action Stage
-  # post-actions:
-  #   needs: [pre-actions,build-and-push]
-  #   uses: daeuniverse/ci-seed-jobs/.github/workflows/post-actions.yml@master
-  #   with:
-  #     IMAGE_NAME: ${{ needs.build-and-push.outputs.image_name }}
-  #     IMAGE_TAG: ${{ needs.build-and-push.outputs.image_tag }}
-  #     SHA_SHORT: ${{ needs.pre-actions.outputs.git_sha_short }}
-  #   secrets: inherit
   post-actions:
     needs: [pre-actions,build-and-push]
     uses: daeuniverse/ci-seed-jobs/.github/workflows/post-actions.yml@master
