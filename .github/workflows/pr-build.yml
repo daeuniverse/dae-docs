@@ -1,11 +1,7 @@
 ---
-name: Build OCI Container
+name: Build OCI Container (PR)
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
-      - ci*
   pull_request:
     types: [ opened, synchronize, reopened ]
 
@@ -15,7 +11,7 @@ jobs:
     uses: daeuniverse/ci-seed-jobs/.github/workflows/pre-actions.yml@master
     with:
       repository: ${{ github.repository }}
-      ref: ${{ github.event.after }}
+      ref: ${{ github.event.pull_request.head.sha }}
       fetch-depth: 0
     secrets: inherit
 
@@ -26,7 +22,7 @@ jobs:
     env:
       dockerfile: Dockerfile
       image_name: dae-docs
-      image_tag: ${{ github.head_ref || github.ref_name }}-${{ needs.pre-actions.outputs.git_sha_short }}-${{ github.run_number }}
+      image_tag: pr-${{ needs.pre-actions.outputs.git_sha_short }}-${{ github.run_number }}
     outputs:
       image_name: ${{ env.image_name }}
       image_tag: ${{ env.image_tag }}
