@@ -38,7 +38,6 @@ jobs:
       image_name: dae-docs
       image_tag: prod-${{ needs.pre-actions.outputs.git_sha_short }}-${{ github.run_number }}
     outputs:
-      image_name: ${{ env.image_name }}
       image_tag: ${{ env.image_tag }}
     steps:
       - uses: actions/checkout@master
@@ -64,7 +63,6 @@ jobs:
     needs: [pre-actions,build-and-push]
     uses: daeuniverse/ci-seed-jobs/.github/workflows/post-actions.yml@master
     with:
-      image_name: ${{ needs.build-and-push.outputs.image_name }}
       image_tag: ${{ needs.build-and-push.outputs.image_tag }}
       sha_short: ${{ needs.pre-actions.outputs.git_sha_short }}
     secrets: inherit
