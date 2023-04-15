@@ -15,7 +15,7 @@ curl --silent "https://api.github.com/repos/daeuniverse/dae/releases" | jq -r '.
 ## Releases
 
 - [0.1.7 (Pre-release)](#0.1.7)
-- [0.1.6](#0.1.6)
+- [0.1.6 (Pre-release)](#0.1.6)
 - [0.1.5 (Current)](#0.1.5)
 - [0.1.4](#0.1.4)
 - [0.1.3](#0.1.3)
@@ -53,7 +53,7 @@ curl --silent "https://api.github.com/repos/daeuniverse/dae/releases" | jq -r '.
 
 #### Feature
 
-- Add supports to use `reject` for outbound in `DNS request routing section.
+- Add supports to use `reject` for outbound in DNS request routing section.
 - Add support for outbound routing using `must group names`. This rule will be enforced on DNS requests directly through a specific group, bypassing DNS modules, available to users that have special use cases.
 - Add support to use `must_rules` four outbound routing. Requests that hit such outbound will bypass the DNS module and will route based on rules for users that have special use cases.
 - Add support to non-standard `bool` value parsing in VMESS formatting followed by V2RAYN.
