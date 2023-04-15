@@ -35,7 +35,6 @@ jobs:
     needs: [pre-actions]
     env:
       dockerfile: Dockerfile
-      image_name: dae-docs
       image_tag: prod-${{ needs.pre-actions.outputs.git_sha_short }}-${{ github.run_number }}
     outputs:
       image_tag: ${{ env.image_tag }}
@@ -48,7 +47,7 @@ jobs:
           registry: quay.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.QUAY_PASS }}
-          image: ${{ github.repository_owner }}/${{ env.image_name }}
+          image: ${{ github.repository }}
           build_file: ${{ env.dockerfile }}
           tag: ${{ env.image_tag }}
           tag_with_latest: true
@@ -57,7 +56,7 @@ jobs:
 
       - name: Echo image uri
         run: |
-          echo "ImageURI (quay.io): quay.io/${{ github.repository_owner }}/${{ env.image_name }}:${{ env.image_tag }}"
+          echo "ImageURI (quay.io): quay.io/${{ github.repository }}:${{ env.image_tag }}"
 
   post-actions:
     needs: [pre-actions,build-and-push]
