@@ -42,11 +42,11 @@ And make sure domain `dns.google.com` will be proxied in routing rules.
 ```python title="config.dae"
 dns {
   upstream {
-    adguardhome: "udp://127.0.0.1:53";
+    adguardhome: "udp://127.0.0.1:53"
   }
   routing {
     request {
-      fallback: adguardhome;
+      fallback: adguardhome
     }
   }
 }
@@ -94,11 +94,11 @@ And make sure domain `dns.google.com` will be proxied in routing rules.
 ```python title="config.dae"
 dns {
   upstream {
-    adguardhome: "udp://192.168.30.3:53";
+    adguardhome: "udp://192.168.30.3:53"
   }
   routing {
     request {
-      fallback: adguardhome;
+      fallback: adguardhome
     }
   }
 }
