@@ -29,7 +29,7 @@ curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C ho
 
 :::important notes
 
-This chapter intruduces how to use [lima](https://github.com/lima-vm/lima) virtual machine to run dae.
+This chapter intruduces how to use [lima](https://github.com/lima-vm/lima) virtual machine to run dae, and proxy whole macOS host network.
 
 :::
 
