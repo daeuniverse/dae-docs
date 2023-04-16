@@ -1,5 +1,5 @@
 ---
-position: 1
+position: 2
 ---
 
 # Use External DNS
