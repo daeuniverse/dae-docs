@@ -4,7 +4,11 @@ position: 3
 
 # Routing
 
-> Here are some examples and templates for `routing` configuration.
+:::important notes
+
+Here are some examples and templates for `routing` configuration.
+
+:::
 
 ## Examples
 
