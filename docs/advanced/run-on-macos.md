@@ -70,7 +70,7 @@ networks:
 - lima: bridged
   interface: "lima0"
 memory: "1GB"
-disk: "30GiB"
+disk: "3GiB"
 EOF
 ```
 
