@@ -85,18 +85,14 @@ limactl start dae
 # Enter the dae VM.
 limactl shell dae
 
-# Disable to auto configure network.
-echo "network: {config: disabled}" | sudo tee /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
-
 # Manually configure network.
-cat << 'EOF' | sudo tee /etc/netplan/50-cloud-init.yaml
+cat << 'EOF' | sudo tee /etc/netplan/99-override.yaml
 network:
     ethernets:
         eth0:
             dhcp4: true
             dhcp4-overrides:
-                use-routes: false
-                use-dns: false
+                route-metric: 200
         lima0:
             dhcp4: true
             dhcp6: true
