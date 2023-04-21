@@ -35,7 +35,7 @@ export default function Home(): JSX.Element {
       description="A Linux high-performance transparent proxy solution based on eBPF"
     >
       <HomepageHeader />
-      <main>{ <HomepageFeatures /> }</main>
+      <main>{/* <HomepageFeatures /> */}</main>
     </Layout>
   );
 }
