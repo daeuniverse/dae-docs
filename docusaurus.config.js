@@ -47,6 +47,7 @@ const config = {
               path: "current",
             },
           },
+          showLastUpdateTime: true,
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
