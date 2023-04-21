@@ -7,7 +7,8 @@ const darkCodeTheme = require("prism-react-renderer/themes/palenight");
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Dae",
-  tagline: "A Linux high-performance transparent proxy solution based on eBPF",
+  tagline:
+    "A Linux high-performance transparent proxy solution based on eBPF 🔥",
   // favicon: 'img/favicon.ico',
   favicon: "https://github.com/daeuniverse/assets/raw/master/logo.png",
 
@@ -47,6 +48,7 @@ const config = {
               path: "current",
             },
           },
+          showLastUpdateTime: true,
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
