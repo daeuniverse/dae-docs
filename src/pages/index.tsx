@@ -19,7 +19,7 @@ function HomepageHeader() {
             className="button button--secondary button--lg"
             to="/docs/current/intro"
           >
-            Dae Tutorial - 10 min ⏱️
+            Get Started → 10 min ⏱️
           </Link>
         </div>
       </div>
@@ -35,7 +35,7 @@ export default function Home(): JSX.Element {
       description="A Linux high-performance transparent proxy solution based on eBPF"
     >
       <HomepageHeader />
-      <main>{/* <HomepageFeatures /> */}</main>
+      <main>{ <HomepageFeatures /> }</main>
     </Layout>
   );
 }
