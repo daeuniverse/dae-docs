@@ -12,7 +12,7 @@ invalid argument: unknown func bpf_trace_printk
 
 :::info actions
 
-Compile dae with CFLAG `-D__REMOVE_BPF_PRINTK`. See [Build guide](./basics/build-guide).
+Compile dae with CFLAG `-D__REMOVE_BPF_PRINTK`. See [Build guide](./user-guide/build-guide).
 
 :::
 
@@ -26,7 +26,7 @@ Compile dae with CFLAG `-D__REMOVE_BPF_PRINTK`. See [Build guide](./basics/build
 
 :::info actions
 
-If you use `adguardhome`, `mosdns` in `dns` section, refer to [external-dns](./advanced/external-dns).
+If you use `adguardhome`, `mosdns` in `dns` section, refer to [external-dns](./configuration/external-dns).
 
 :::
 
