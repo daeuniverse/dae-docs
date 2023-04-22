@@ -12,7 +12,7 @@ Use `uname -r` to check the kernel version on your machine.
 
 :::note note
 
-If you find your kernel version is `< 5.8`, follow the [**Upgrade Guide**](./basics/kernel-upgrade-guide) to upgrade the kernel to the minimum required version.
+If you find your kernel version is `< 5.8`, follow the [**Upgrade Guide**](./user-guide/kernel-upgrade-guide) to upgrade the kernel to the minimum required version.
 
 :::
 
@@ -79,7 +79,7 @@ Check them using command like:
 
 :::tip tips
 
-`Armbian` users can follow the [**Upgrade Guide**](./basics/kernel-upgrade-guide) to upgrade the kernel to meet the kernel configuration requirement.
+`Armbian` users can follow the [**Upgrade Guide**](./user-guide/kernel-upgrade-guide) to upgrade the kernel to meet the kernel configuration requirement.
 
 :::
 
@@ -125,7 +125,7 @@ See [daeuniverse/dae-installer](https://github.com/daeuniverse/dae-installer) (o
 
 ### Build from scratch
 
-See [Build Guide](./basics/build-guide).
+See [Build Guide](./user-guide/build-guide).
 
 ---
 
@@ -205,10 +205,10 @@ If you use PVE, refer to [GitHub Issue #37](https://github.com/daeuniverse/dae/d
 
 When the configuration changes, it is convenient to use command to hot reload the configuration, and the existing connection will not be interrupted in the process. When you want to suspend dae, you can use command to pause.
 
-See [Reload and suspend](./basics/reload-and-suspend).
+See [Reload and suspend](./user-guide/reload-and-suspend).
 
 ---
 
 ## Troubleshooting
 
-See [Troubleshooting](./troubleshooting).
+See [FAQ](./FAQ).
