@@ -1,8 +1,8 @@
 ---
-position: 4
+position: 1
 ---
 
-# Run on MacOS
+# Use Dae on MacOS
 
 ## Install HomeBrew
 

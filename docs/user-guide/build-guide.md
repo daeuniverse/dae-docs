@@ -2,7 +2,7 @@
 position: 3
 ---
 
-# Build guide
+# Build Guide
 
 ## Build
 
