@@ -16,17 +16,17 @@ global {
     log_level: info
 
     # Node connectivity check.
-    # Host of URL should have both IPv4 and IPv6 if you have double stack in local.
+    # First is URL, others are IP addresses if given.
     # Considering traffic consumption, it is recommended to choose a site with anycast IP and less response.
-    #tcp_check_url: 'http://keep-alv.google.com/generate_204'
-    tcp_check_url: 'http://gstatic.com/generate_204'
+    #tcp_check_url: 'http://cp.cloudflare.com'
+    tcp_check_url: 'http://cp.cloudflare.com,1.1.1.1,2606:4700:4700::1111'
 
     # This DNS will be used to check UDP connectivity of nodes. And if dns_upstream below contains tcp, it also be used to check
     # TCP DNS connectivity of nodes.
+    # First is URL, others are IP addresses if given.
     # This DNS should have both IPv4 and IPv6 if you have double stack in local.
-    udp_check_dns: 'dns.google.com:53'
-
-    check_interval: 30s
+    #udp_check_dns: 'dns.google.com:53'
+    udp_check_dns: 'dns.google.com:53,8.8.8.8,2001:4860:4860::8888'
 
     # Group will switch node only when new_latency <= old_latency - tolerance.
     check_tolerance: 50ms

@@ -14,14 +14,38 @@ curl --silent "https://api.github.com/repos/daeuniverse/dae/releases" | jq -r '.
 
 ## Releases
 
+- [0.1.7 (Pre-release)](#018-pre-release)
 - [0.1.7 (Current)](#017-current)
-- [0.1.6 (Pre-release)](#016-pre-release)
+- [0.1.6](#016)
 - [0.1.5](#015)
 - [0.1.4](#014)
 - [0.1.3](#013)
 - [0.1.2](#012)
 - [0.1.1](#011)
 - [0.1.0](#010)
+
+### 0.1.8 (Pre-release)
+
+> Release date: 2023/04/30
+
+#### Features Changelogs
+
+- optimize: add support to cache DNS empty response and non-A/AAAA query type and reject 0.0.0.0 and :: by @mzz2017 in https://github.com/daeuniverse/dae/pull/63
+- feat: add support for `tcp_check_url` and `udp_check_dns` with set static ip to prevent ipv4/ipv6 DNS contamination by @mzz2017 in https://github.com/daeuniverse/dae/commit/9493b9a0aa82573fed934bf62cc836f0fe148607
+
+#### Other Changelogs
+
+- chore: update changelogs by @yqlbu in https://github.com/daeuniverse/dae/pull/55
+- chore: add pre-commit hooks by @yqlbu in https://github.com/daeuniverse/dae/pull/59
+- style: add golang formatter support by @czybjtu in https://github.com/daeuniverse/dae/pull/58
+- chore: add issue templates by @yqlbu in https://github.com/daeuniverse/dae/pull/62
+- chore(codeowner): update ownership by @yqlbu in https://github.com/daeuniverse/dae/pull/64
+
+#### New Contributors
+
+- @czybjtu made their first contribution in https://github.com/daeuniverse/dae/pull/58
+
+**Full Changelog**: https://github.com/daeuniverse/dae/compare/v0.1.7...v0.1.8
 
 ### 0.1.7 (Current)
 
