@@ -22,6 +22,21 @@ Before you start any Pull Request, `it is recommended that you create an issue` 
 
 :::
 
+### Pre-commit Hook
+
+:::info important
+
+This repo uses [pre-commit hook](https://github.com/pre-commit/pre-commit-hooks) to apply linting check prior to writing commit to local git history. To set up pre-commit, do the followings:
+
+```bash
+# install pre-commit
+pip3 install pre-commit
+# install pre-commit hooks
+pre-commit install
+```
+
+:::
+
 ### Commit Message
 
 Seen in [Semantic Commit Messages](./commit-msg-guide).

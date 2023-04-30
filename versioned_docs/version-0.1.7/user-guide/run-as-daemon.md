@@ -2,7 +2,7 @@
 position: 4
 ---
 
-# Run as systemd service
+# Run as Systemd Service
 
 dae can run as a **daemon(systemd) service** so that it can run at boot.
 

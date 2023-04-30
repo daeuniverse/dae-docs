@@ -2,7 +2,7 @@
 position: 1
 ---
 
-# Kernel upgrade guide
+# Kernel Upgrade Guide
 
 A `kernel` is the core of any operating system. Before you start calling Linux an operating system, you need to know the basic concept and Linux’s birth history. **_Linux is not an operating system; mainly, Linux is a kernel_**.
 
