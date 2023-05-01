@@ -27,6 +27,7 @@ global {
     # This DNS should have both IPv4 and IPv6 if you have double stack in local.
     #udp_check_dns: 'dns.google.com:53'
     udp_check_dns: 'dns.google.com:53,8.8.8.8,2001:4860:4860::8888'
+    check_interval: 30s
 
     # Group will switch node only when new_latency <= old_latency - tolerance.
     check_tolerance: 50ms
