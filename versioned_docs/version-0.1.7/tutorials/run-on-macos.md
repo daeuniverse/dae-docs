@@ -1,8 +1,8 @@
 ---
-position: 4
+position: 1
 ---
 
-# Run on MacOS
+# Use Dae on MacOS
 
 ## Install HomeBrew
 
@@ -51,7 +51,7 @@ Then, configure lima configuration and dae VM configuration.
 ```shell
 # Configure lima networks.
 socket_vmnet_bin=$(readlink -f ${HOMEBREW_PREFIX}/opt/socket_vmnet)/bin/socket_vmnet
-sed -ir "s#^ *socketVMNet:.*#  socketVMNet: \"${socket_vmnet_bin}\"#" .lima/_config/networks.yaml
+sed -ir "s#^ *socketVMNet:.*#  socketVMNet: \"${socket_vmnet_bin}\"#" ~/.lima/_config/networks.yaml
 ```
 
 ```shell
@@ -70,7 +70,7 @@ networks:
 - lima: bridged
   interface: "lima0"
 memory: "1GB"
-disk: "20GiB"
+disk: "3GiB"
 EOF
 ```
 
@@ -85,26 +85,17 @@ limactl start dae
 # Enter the dae VM.
 limactl shell dae
 
-# Disable to auto configure network.
-echo "network: {config: disabled}" | sudo tee /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
-
 # Manually configure network.
-cat << 'EOF' | sudo tee /etc/netplan/50-cloud-init.yaml
+cat << 'EOF' | sudo tee /etc/netplan/99-override.yaml
 network:
     ethernets:
         eth0:
             dhcp4: true
-            match:
-                macaddress: 52:55:55:83:ed:b2
-            set-name: eth0
             dhcp4-overrides:
-                use-routes: false
-                use-dns: false
+                route-metric: 200
         lima0:
             dhcp4: true
-            match:
-                macaddress: 52:55:55:e6:86:c5
-            set-name: lima0
+            dhcp6: true
     version: 2
 EOF
 
@@ -216,10 +207,16 @@ Write a script to execute.
 mkdir -p /Users/Shared/bin
 cat << 'EOF' > /Users/Shared/bin/dae-network-update.sh
 #!/bin/sh
-set -e
+set -ex
 export PATH=$PATH:/opt/local/bin/:/opt/homebrew/bin/
 dae_ip=$(limactl shell dae ip --json addr | limactl shell dae jq -cr '.[] | select( .ifname == "lima0" ).addr_info | .[] | select( .family == "inet" ).local')
-current_gateway=$(route get default|grep gateway|rev|cut -d' ' -f1|rev)
+current_gateway=$(route -n get default|grep gateway|rev|cut -d' ' -f1|rev)
+networksetup -getdnsservers Wi-Fi | cut -d" " -f1 | grep -E '\.|:' && dns_override=1
+[ ! -z "$dae_ip" ] && ping -c 1 -t 1 -n "$dae_ip" && dae_ready=1
+[ -z "$dae_ready" ] && [ ! -z "$dns_override" ] && (networksetup -setmanual Wi-Fi 1.1.1.1 1.1.1.1/32 1.1.1.1; networksetup -setdhcp Wi-Fi; networksetup -setdnsservers Wi-Fi "Empty"; exit 1)
+networksetup -getdnsservers Wi-Fi | cut -d" " -f1 | grep -E '\.|:' && dns_override=1
+[ ! -z "$dae_ip" ] && ping -c 1 -t 1 -n "$dae_ip" && dae_ready=1
+[ -z "$dae_ready" ] && [ ! -z "$dns_override" ] && (networksetup -setmanual Wi-Fi 1.1.1.1 1.1.1.1/32 1.1.1.1; networksetup -setdhcp Wi-Fi; networksetup -setdnsservers Wi-Fi "Empty"; exit 1)
 [ "$current_gateway" != "$dae_ip" ] && (sudo route delete default; sudo route add default $dae_ip)
 networksetup -setdnsservers Wi-Fi $dae_ip
 exit 0

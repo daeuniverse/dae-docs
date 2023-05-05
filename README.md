@@ -27,6 +27,12 @@ npm run build
 ./node_modules/http-server/bin/http-server ./build/
 ```
 
+release a new version
+
+```bash
+npm run docusaurus docs:version <version tag>
+```
+
 ## References
 
 - [Docusarus - Using Plugins](https://docusaurus.io/docs/next/using-plugins#using-themes)
