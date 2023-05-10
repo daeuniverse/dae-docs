@@ -31,6 +31,8 @@ release a new version
 
 ```bash
 npm run docusaurus docs:version <version tag>
+# or
+npm run release <version tag>
 ```
 
 ## References
