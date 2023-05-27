@@ -8,6 +8,9 @@ Original Copy: https://github.com/daeuniverse/dae/blob/main/example.dae
 
 ```python
 global {
+    ##### Software options.
+    ###
+
     # tproxy port to listen on. It is NOT a HTTP/SOCKS port, and is just used by eBPF program.
     # In normal case, you do not need to use it.
     tproxy_port: 12345
@@ -15,22 +18,12 @@ global {
     # Log level: error, warn, info, debug, trace.
     log_level: info
 
-    # Node connectivity check.
-    # First is URL, others are IP addresses if given.
-    # Considering traffic consumption, it is recommended to choose a site with anycast IP and less response.
-    #tcp_check_url: 'http://cp.cloudflare.com'
-    tcp_check_url: 'http://cp.cloudflare.com,1.1.1.1,2606:4700:4700::1111'
+    # Disable waiting for network before pulling subscriptions.
+    disable_waiting_network: false
 
-    # This DNS will be used to check UDP connectivity of nodes. And if dns_upstream below contains tcp, it also be used to check
-    # TCP DNS connectivity of nodes.
-    # First is URL, others are IP addresses if given.
-    # This DNS should have both IPv4 and IPv6 if you have double stack in local.
-    #udp_check_dns: 'dns.google.com:53'
-    udp_check_dns: 'dns.google.com:53,8.8.8.8,2001:4860:4860::8888'
-    check_interval: 30s
 
-    # Group will switch node only when new_latency <= old_latency - tolerance.
-    check_tolerance: 50ms
+    ##### Interface and kernel options.
+    ###
 
     # The LAN interface to bind. Use it if you want to proxy LAN.
     # Multiple interfaces split by ",".
@@ -40,8 +33,39 @@ global {
     # Multiple interfaces split by ",". Use "auto" to auto detect.
     wan_interface: auto
 
-    # Allow insecure TLS certificates. It is not recommended to turn it on unless you have to.
-    allow_insecure: false
+    # Automatically configure Linux kernel parameters like ip_forward and send_redirects. Check out
+    # https://github.com/daeuniverse/dae/blob/main/docs/getting-started/kernel-parameters.md to see what will dae do.
+    auto_config_kernel_parameter: true
+
+
+    ##### Node connectivity check.
+    ###
+
+    # Host of URL should have both IPv4 and IPv6 if you have double stack in local.
+    # First is URL, others are IP addresses if given.
+    # Considering traffic consumption, it is recommended to choose a site with anycast IP and less response.
+    #tcp_check_url: 'http://cp.cloudflare.com'
+    tcp_check_url: 'http://cp.cloudflare.com,1.1.1.1,2606:4700:4700::1111'
+
+    # The HTTP request method to `tcp_check_url`. Use 'CONNECT' by default because some server implementations bypass
+    # accounting for this kind of traffic.
+    tcp_check_http_method: CONNECT
+
+    # This DNS will be used to check UDP connectivity of nodes. And if dns_upstream below contains tcp, it also be used to check
+    # TCP DNS connectivity of nodes.
+    # First is URL, others are IP addresses if given.
+    # This DNS should have both IPv4 and IPv6 if you have double stack in local.
+    #udp_check_dns: 'dns.google.com:53'
+    udp_check_dns: 'dns.google.com:53,8.8.8.8,2001:4860:4860::8888'
+
+    check_interval: 30s
+
+    # Group will switch node only when new_latency <= old_latency - tolerance.
+    check_tolerance: 50ms
+
+
+    ##### Connecting options.
+    ###
 
     # Optional values of dial_mode are:
     # 1. "ip". Dial proxy using the IP from DNS directly. This allows your ipv4, ipv6 to choose the optimal path
@@ -60,16 +84,19 @@ global {
     #       domain based traffic split ability. It doesn't work for direct traffic and consumes more CPU resources.
     dial_mode: domain
 
-    # Disable waiting for network before pulling subscriptions.
-    disable_waiting_network: false
-
-    # Automatically configure Linux kernel parameters like ip_forward and send_redirects. Check out
-    # https://github.com/daeuniverse/dae/blob/main/docs/getting-started/kernel-parameters.md to see what will dae do.
-    auto_config_kernel_parameter: true
+    # Allow insecure TLS certificates. It is not recommended to turn it on unless you have to.
+    allow_insecure: false
 
     # Timeout to waiting for first data sending for sniffing. It is always 0 if dial_mode is ip. Set it higher is useful
     # in high latency LAN network.
     sniffing_timeout: 100ms
+
+    # TLS implementation. tls is to use Go's crypto/tls. utls is to use uTLS, which can imitate browser's Client Hello.
+    tls_implementation: tls
+
+    # The Client Hello ID for uTLS to imitate. This takes effect only if tls_implementation is utls.
+    # See more: https://github.com/daeuniverse/dae/blob/331fa23c16/component/outbound/transport/tls/utls.go#L17
+    utls_imitate: chrome_auto
 }
 
 # Subscriptions defined here will be resolved as nodes and merged as a part of the global node pool.
