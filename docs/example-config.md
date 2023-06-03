@@ -4,12 +4,13 @@ sidebar_position: 7
 
 # Example Config
 
-Original Copy: https://github.com/daeuniverse/dae/blob/main/example.dae
+Original Copy: <https://github.com/daeuniverse/dae/blob/main/example.dae>
+
+<!-- START -->
 
 ```python
 global {
     ##### Software options.
-    ###
 
     # tproxy port to listen on. It is NOT a HTTP/SOCKS port, and is just used by eBPF program.
     # In normal case, you do not need to use it.
@@ -23,7 +24,6 @@ global {
 
 
     ##### Interface and kernel options.
-    ###
 
     # The LAN interface to bind. Use it if you want to proxy LAN.
     # Multiple interfaces split by ",".
@@ -39,7 +39,6 @@ global {
 
 
     ##### Node connectivity check.
-    ###
 
     # Host of URL should have both IPv4 and IPv6 if you have double stack in local.
     # First is URL, others are IP addresses if given.
@@ -65,7 +64,6 @@ global {
 
 
     ##### Connecting options.
-    ###
 
     # Optional values of dial_mode are:
     # 1. "ip". Dial proxy using the IP from DNS directly. This allows your ipv4, ipv6 to choose the optimal path
@@ -121,8 +119,16 @@ node {
 
 # See https://github.com/daeuniverse/dae/blob/main/docs/dns.md for full examples.
 dns {
-    # For example, if ipversion_prefer is 4 and the domain name has both type A and type AAAA records, the dae will only respond to type A queries and response empty answer to type AAAA queries.
+    # For example, if ipversion_prefer is 4 and the domain name has both type A and type AAAA records, the dae will only
+    # respond to type A queries and response empty answer to type AAAA queries.
     #ipversion_prefer: 4
+
+    # Give a fixed ttl for domains. Zero means that dae will request to upstream every time and not cache DNS results
+    # for these domains.
+    #fixed_domain_ttl {
+    #    ddns.example.org: 10
+    #    test.example.org: 3600
+    #}
 
     upstream {
         # Value can be scheme://host:port, where the scheme can be tcp/udp/tcp+udp.
@@ -207,4 +213,7 @@ routing {
 
     fallback: my_group
 }
+
 ```
+
+<!-- END -->
