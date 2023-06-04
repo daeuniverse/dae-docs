@@ -89,7 +89,11 @@ Check them using command like:
 
 ### Archlinux/Manjaro
 
-dae has been released on [AUR](https://aur.archlinux.org/packages/dae/).
+:::tip tips
+
+dae has been released on [AUR](https://aur.archlinux.org/packages/dae).
+
+:::
 
 ```shell
 # yay -S dae
@@ -110,7 +114,11 @@ sudo systemctl enable dae
 
 ### Gentoo Linux
 
+:::tip tips
+
 dae has been released on [gentoo-zh](https://github.com/microcai/gentoo-zh)
+
+:::
 
 use `app-eselect/eselect-repository` to enable this overlay:
 
@@ -126,7 +134,7 @@ We provide a hacky way to run dae on your macOS. See [run on macOS](./tutorials/
 
 ### Docker
 
-Pre-built image and related docs can be found at https://hub.docker.com/r/daeuniverse/dae.
+Pre-built image and related docs can be found at <https://hub.docker.com/r/daeuniverse/dae>.
 
 Alternatively, you can use `docker compose`:
 

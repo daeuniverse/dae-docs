@@ -10,6 +10,17 @@ position: 1
 
 ```python title="config.dae"
 dns {
+    # For example, if ipversion_prefer is 4 and the domain name has both type A and type AAAA records, the dae will only
+    # respond to type A queries and response empty answer to type AAAA queries.
+    ipversion_prefer: 4
+
+    # Give a fixed ttl for domains. Zero means that dae will request to upstream every time and not cache DNS results
+    # for these domains.
+    fixed_domain_ttl {
+        ddns.example.org: 10
+        test.example.org: 3600
+    }
+
     upstream {
         # Value can be scheme://host:port.
         # Scheme list: tcp, udp, tcp+udp. Ongoing: https, tls, quic.
@@ -34,6 +45,7 @@ dns {
 
             # DNS request name (omit suffix dot '.').
             qname(geosite:category-ads-all) -> reject
+            qname(geosite:google@cn) -> alidns # Also see: https://github.com/v2ray/domain-list-community#attributes
             qname(suffix: abc.com, keyword: google) -> googledns
             qname(full: ok.com, regex: '^yes') -> googledns
             # DNS request type

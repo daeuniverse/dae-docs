@@ -15,7 +15,7 @@ golang >= 1.18
 make
 ```
 
-### Build
+### Compilation
 
 ```bash
 git clone https://github.com/daeuniverse/dae.git
@@ -66,4 +66,4 @@ After fine tuning, run dae:
 ./dae run -c example.dae
 ```
 
-Alternatively, you may run dae as a daemon(systemd) service. Check out more details [HERE](./run-as-daemon).
+Alternatively, you may run dae as a daemon(systemd) service. Check out more details [HERE](./run-as-daemon.md).
