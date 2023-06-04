@@ -221,7 +221,6 @@ routing {
 
     fallback: my_group
 }
-
 ```
 
 <!-- END -->
