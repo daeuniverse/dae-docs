@@ -14,8 +14,9 @@ curl --silent "https://api.github.com/repos/daeuniverse/dae/releases" | jq -r '.
 
 ## Releases
 
-- [0.1.9 (Pre-release)](#019-pre-release)
-- [0.1.8 (Current)](#018-current)
+- [0.1.10 (current)](#0110-current)
+- [0.1.9](#019)
+- [0.1.8](#018)
 - [0.1.7](#017)
 - [0.1.6](#016)
 - [0.1.5](#015)
@@ -25,7 +26,28 @@ curl --silent "https://api.github.com/repos/daeuniverse/dae/releases" | jq -r '.
 - [0.1.1](#011)
 - [0.1.0](#010)
 
-### 0.1.9 (Pre-release)
+### 0.1.10 (Current)
+
+> Release date: 2023/06/04
+
+#### Changes
+
+- feat: support `tcp_check_http_method` by @mzz2017 in https://github.com/daeuniverse/dae/pull/77
+- patch: search geodata at same dir with config first by @mzz2017 in https://github.com/daeuniverse/dae/pull/84
+- fix(dns): cache would never expire caused by #63 by accident by @mzz2017 in https://github.com/daeuniverse/dae/pull/87
+- patch(geodata): fix incorrect geodata search path `/etc/dae/dae` caused by #84 by @mzz2017 in https://github.com/daeuniverse/dae/pull/90
+- fix(dns): cache would never expire caused by #63 by accident by @mzz2017 in https://github.com/daeuniverse/dae/pull/87
+
+#### Other Changes
+
+- chore(Makefile): add export GOOS=linux to build on macos by @mzz2017 in https://github.com/daeuniverse/dae/pull/78
+- chore: add editorconfig by @yqlbu in https://github.com/daeuniverse/dae/pull/85
+- chore: add pull_request_template by @yqlbu in https://github.com/daeuniverse/dae/pull/86
+
+**Full Changelog**: https://github.com/daeuniverse/dae/compare/v0.1.9...v0.1.10
+**Example Config**: https://github.com/daeuniverse/dae/blob/v0.1.10/example.dae
+
+### 0.1.9
 
 > Release date: 2023/05/10
 
@@ -40,7 +62,7 @@ curl --silent "https://api.github.com/repos/daeuniverse/dae/releases" | jq -r '.
 
 **Full Changelog**: https://github.com/daeuniverse/dae/compare/v0.1.8...v0.1.9
 
-### 0.1.8 (Current)
+### 0.1.8
 
 > Release date: 2023/04/30
 
