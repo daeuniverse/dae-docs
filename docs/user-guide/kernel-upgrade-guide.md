@@ -56,7 +56,7 @@ sudo reboot
 uname -r
 ```
 
-(DEBIAN ONLY): If you would like to upgrade to the latest Kernel (AGGRESSIVE UPGRADE), follow the commands below:
+(Debian ONLY): If you would like to upgrade to the latest Kernel (AGGRESSIVE UPGRADE), follow the commands below:
 
 :::danger warn
 
@@ -64,7 +64,7 @@ Hi The latest Kernel that Debian officially supports is available in the `unstab
 
 :::
 
-Reference: [https://www.itsfoss.net/installing-linux-5-14-kernel-on-debian-11/](https://www.itsfoss.net/installing-linux-5-14-kernel-on-debian-11/)
+Reference: [https://www.itsfoss.net/installing-linux-5-14-kernel-on-debian-11/](https://www.itsfoss.net/installing-linux-5-14-kernel-on-debian-11)
 
 :::caution caution
 

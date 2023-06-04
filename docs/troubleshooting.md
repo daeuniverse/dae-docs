@@ -2,9 +2,9 @@
 sidebar_position: 7
 ---
 
-# Troubleshooting
+# FAQ
 
-## Unknown bpf_trace_printk
+### Unknown bpf_trace_printk
 
 ```console
 invalid argument: unknown func bpf_trace_printk
@@ -16,13 +16,13 @@ Compile dae with CFLAG `-D__REMOVE_BPF_PRINTK`. See [Build guide](./user-guide/b
 
 :::
 
-## PVE related
+### PVE related
 
 1. [PVE NIC Hardware passthrough](https://github.com/daeuniverse/dae/issues/43)
 
-## Binding to WAN but no network
+### Binding to WAN but no network
 
-### Troubleshoot local DNS service
+#### Troubleshoot local DNS service
 
 :::info actions
 
@@ -30,7 +30,7 @@ If you use `adguardhome`, `mosdns` in `dns` section, refer to [external-dns](./c
 
 :::
 
-### Troubleshoot firewall
+#### Troubleshoot firewall
 
 :::info actions
 
@@ -45,7 +45,7 @@ firewalld
 
 :::
 
-### Troubleshoot PPPoE
+#### Troubleshoot PPPoE
 
 :::info actions
 
@@ -53,9 +53,9 @@ dae does not support PPPoE yet. We are working on it. However, binding to LAN fo
 
 :::
 
-## Binding to LAN but bad DNS in other machines
+### Binding to LAN but bad DNS in other machines
 
-### Troubleshoot config of dae
+#### Troubleshoot config of dae
 
 :::info actions
 
@@ -65,7 +65,7 @@ For example, if your use the same interface eth1 for WAN and LAN, write it as `w
 
 :::
 
-### Troubleshoot DNS
+#### Troubleshoot DNS
 
 :::info actions
 
