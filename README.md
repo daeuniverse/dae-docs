@@ -24,7 +24,7 @@ compile as dist and host with http-server
 # build artifacts
 npm run build
 # serve static files
-./node_modules/http-server/bin/http-server ./build/
+npx http-server ./build/
 ```
 
 release a new version
@@ -33,6 +33,7 @@ release a new version
 npm run docusaurus docs:version <version tag>
 # or
 npm run release <version tag>
+# e.g npm run release v0.2.0
 ```
 
 ## References
